@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 
-// Depth Frist Search
+// Depth First Search
 public class Graph {
 
 	private HashMap<Integer, Node> nodeLookup = new HashMap<Integer, Node>();
@@ -17,7 +17,7 @@ public class Graph {
 		graph.addEdge(4, 5);
 		graph.addEdge(2, 5);
 
-		System.out.println(graph.hasPathDFS(1,5));
+		System.out.println(graph.hasPathDFS(1, 5));
 	}
 
 	public class Node {
@@ -36,20 +36,22 @@ public class Graph {
 	public void addEdge(int sourceID, int destinationID) {
 		Node sourceNode;
 		Node destinationNode;
-		
-		if(getNode(sourceID)==null){
+
+		if (getNode(sourceID) == null) {
 			sourceNode = new Node(sourceID);
-		} else 
+		} else {
 			sourceNode = getNode(sourceID);
-		
-		if(getNode(destinationID)==null) {
+		}
+
+		if (getNode(destinationID) == null) {
 			destinationNode = new Node(destinationID);
-		} else
+		} else {
 			destinationNode = getNode(destinationID);
-		
+		}
+
 		LinkedList<Node> sourceLinkedList = sourceNode.adjecentNodes;
 		sourceLinkedList.add(destinationNode);
-		
+
 		System.out.println("sourceNode.nodeID: " + sourceNode.nodeID);
 		for (Node child : sourceLinkedList) {
 			System.out.println("child.nodeID: " + child.nodeID);
