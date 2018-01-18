@@ -6,41 +6,49 @@ import java.util.Scanner;
 
 public class ArrayIntoBinaryTree {
 	/*
-	 Algorithm:
-		1. Insert into the tree the middle element of the array.
-		2. Insert (into the left subtree) the left subarray elements
-		3. Insert (into the right subtree) the right subarray elements
-		4. Recurse
+	 * Algorithm: 1. Insert into the tree the middle element of the array. 2.
+	 * Insert (into the left subtree) the left subarray elements 3. Insert (into
+	 * the right subtree) the right subarray elements 4. Recurse
 	 */
-	
+
 	ArrayIntoBinaryTree arrayIntoBinaryTree = new ArrayIntoBinaryTree();
-	
+
 	public static void main(String[] args) {
 		int[] arr = initializeArray();
-		Node node = addToTree(arr, 0, arr.length);
+		if (arr == null) {
+			throw new NullPointerException("Input array is empty");
+		}
+
+		if (arr.length >= 1) {
+			Node node = addToTree(arr, 0, arr.length);
+		}
 	}
-	
-	// find Subarray - Use Recursion. 
+
+	// find Subarray - Use Recursion.
 	static Node addToTree(int[] arr, int first, int last) {
 		// Exit condition
-		if(first<last) {
+		if (first < last) {
 			return null;
 		}
-		int midElement = arr[(first+last)/2];
+		int midElement = arr[(first + last) / 2];
 		Node newNode = new Node(arr[midElement]);
-		newNode.left = addToTree(arr, first, midElement-1);
-		newNode.right = addToTree(arr, midElement+1, last);
+		newNode.left = addToTree(arr, first, midElement - 1);
+		newNode.right = addToTree(arr, midElement + 1, last);
 		return newNode;
 	}
-	
+
 	static int[] initializeArray() {
 		Scanner sc = new Scanner(System.in);
+		
 		System.out.println("Enter the size of array: ");
 		int size = sc.nextInt();
+		if (size < 1) {
+			return null;
+		}
 		
 		System.out.println("Now enter " + size + " number of elements.");
 		int[] arr = new int[size];
-		for(int i=0; i<size; i++) {
+		for (int i = 0; i < size; i++) {
 			arr[i] = sc.nextInt();
 		}
 		return arr;
